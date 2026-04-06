@@ -66,7 +66,7 @@ class ClarityApp:
         self.char_label.pack(side=tk.LEFT, padx=(0, 10))
         self.char_label.bind("<Button-1>", lambda e: self._open_status_popup())
         self.balance_label = tk.Label(
-            top_frame, text=f"🪙 {self.balance}",
+            top_frame, text=f"$ {self.balance}",
             font=("Segoe UI", 12), bg=BG, fg="#b8860b"
         )
         self.balance_label.pack(side=tk.RIGHT, padx=(0, 4))
@@ -170,7 +170,7 @@ class ClarityApp:
     def _update_balance(self, delta):
         self.balance = max(0, self.balance + delta)
         save_balance(self.balance, self.items_owned)
-        self.balance_label.config(text=f"🪙 {self.balance}")
+        self.balance_label.config(text=f"$ {self.balance}")
 
     def _update_character(self):
         level = CHARACTER_LEVELS[self.items_owned]
@@ -302,12 +302,12 @@ class ClarityApp:
                     window.destroy()
                     self._open_shop()
 
-                tk.Button(row, text=f"🪙 {item['price']}", font=("Segoe UI", 10),
+                tk.Button(row, text=f"$ {item['price']}", font=("Segoe UI", 10),
                           command=buy,
                           state=tk.NORMAL if can_buy else tk.DISABLED
                           ).pack(side=tk.RIGHT)
             else:
-                tk.Label(row, text=f"🪙 {item['price']}", font=("Segoe UI", 10),
+                tk.Label(row, text=f"$ {item['price']}", font=("Segoe UI", 10),
                          bg=BG, fg=FG_DONE).pack(side=tk.RIGHT)
 
             tk.Frame(shop, bg="#eeeeee", height=1).pack(fill=tk.X, padx=16)
@@ -319,7 +319,7 @@ class ClarityApp:
         self.balance -= item["price"]
         self.items_owned += 1
         save_balance(self.balance, self.items_owned)
-        self.balance_label.config(text=f"🪙 {self.balance}")
+        self.balance_label.config(text=f"$ {self.balance}")
         self._update_character()
 
 
